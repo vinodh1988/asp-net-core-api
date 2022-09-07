@@ -10,11 +10,19 @@ namespace CrudAPI.Services
            new Person(){ Sno=2,Name="Justin", City="Sydney"},
            new Person() { Sno=3, Name="Eric", City="Berlin"}
         };
+
+     
+
         public IEnumerable<Person> GetPeople() {
 
 
 
             return list;
+        }
+
+        public void Add(Person person)
+        {
+            list.Add(person);
         }
     }
 }

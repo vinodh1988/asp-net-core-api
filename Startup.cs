@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
@@ -28,7 +29,8 @@ namespace CrudAPI
         {
 
             services.AddControllers();
-            services.AddScoped<IPersonService, PeopleService>();
+            //services.AddScoped<IPersonService, PeopleService>();
+            services.TryAddSingleton<IPersonService, PeopleService>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CrudAPI", Version = "v1" });
