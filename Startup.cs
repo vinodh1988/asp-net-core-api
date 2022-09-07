@@ -1,3 +1,4 @@
+using CrudAPI.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -27,6 +28,7 @@ namespace CrudAPI
         {
 
             services.AddControllers();
+            services.AddScoped<IPersonService, PersonService>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CrudAPI", Version = "v1" });
