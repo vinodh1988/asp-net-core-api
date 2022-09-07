@@ -24,5 +24,15 @@ namespace CrudAPI.Services
         {
             list.Add(person);
         }
+
+        public Person Get(int sno)
+        {
+            foreach (Person person in list) { 
+              if(person.Sno == sno)
+                    return person;
+             
+            }
+            return null;
+        }
     }
 }

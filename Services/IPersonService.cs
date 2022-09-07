@@ -7,6 +7,6 @@ namespace CrudAPI.Services
     {
         public IEnumerable<Person> GetPeople();
         public void Add(Person person);
-
+        public Person Get(int sno);
     }
 }

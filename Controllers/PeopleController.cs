@@ -23,6 +23,22 @@ namespace CrudAPI.Controllers
             return this.Pservice.GetPeople();
         
         }
+        [HttpGet("{sno}")]
+        public ActionResult<Person> Get(int sno) {
+            Person p=this.Pservice.Get(sno);
+            try
+            {
+                if (p == null)
+                {
+                    return StatusCode(StatusCodes.Status204NoContent, new { message = "No such record exists" });
+                }
+                return p;
+            }
+            catch (Exception ex) {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Something wrong" });
+            }
+     
+        }
 
         [HttpPost]
         public ActionResult<Person> Post(Person person) {
