@@ -30,7 +30,7 @@ namespace CrudAPI.Controllers
             {
                 if (p == null)
                 {
-                    return StatusCode(StatusCodes.Status204NoContent, new { message = "No such record exists" });
+                    return StatusCode(StatusCodes.Status204NoContent);
                 }
                 return p;
             }
@@ -38,6 +38,27 @@ namespace CrudAPI.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Something wrong" });
             }
      
+        }
+
+        [HttpDelete("{sno}")]
+        public ActionResult<Person> Delete(int sno) {
+            Person p = this.Pservice.Get(sno);
+            try
+            {
+                if (p == null)
+                    return StatusCode(StatusCodes.Status204NoContent);
+
+                Pservice.Delete(p);
+                return p;
+            }
+            catch (Exception ex)
+            {
+
+                return StatusCode(StatusCodes.Status500InternalServerError, new
+                {
+                    message = "Either sno doesnot exist or someother issue"
+                });
+            }
         }
 
         [HttpPost]
@@ -54,5 +75,8 @@ namespace CrudAPI.Controllers
 
 
         }
-    }
+
+
+
+       }
 }

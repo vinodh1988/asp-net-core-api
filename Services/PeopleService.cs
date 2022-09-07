@@ -34,5 +34,12 @@ namespace CrudAPI.Services
             }
             return null;
         }
+
+        public bool Delete(Person p)
+        {
+         
+            list.Remove(p);
+            return true;
+        }
     }
 }
