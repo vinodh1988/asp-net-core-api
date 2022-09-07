@@ -28,7 +28,7 @@ namespace CrudAPI
         {
 
             services.AddControllers();
-            services.AddScoped<IPersonService, PersonService>();
+            services.AddScoped<IPersonService, PeopleService>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CrudAPI", Version = "v1" });
