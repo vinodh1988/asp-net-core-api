@@ -76,6 +76,25 @@ namespace CrudAPI.Controllers
 
         }
 
+        [HttpPatch("{sno}")]
+        public ActionResult<Person> Patch(int sno,Person person) {
+            Person p = Pservice.Get(sno);
+            try
+            {
+                if (p == null)
+                    return StatusCode(StatusCodes.Status204NoContent);
+                if (person.Name != null)
+                    p.Name = person.Name;
+                if (person.City != null)
+                    p.City = person.City;
+                return p;
+
+            }
+            catch (Exception e) {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Server error" });
+            }
+
+        }
 
 
        }
