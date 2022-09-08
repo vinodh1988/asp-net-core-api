@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace CrudAPI.Controllers
@@ -24,6 +25,33 @@ namespace CrudAPI.Controllers
         {
 
             return await _context.people.ToListAsync();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<IEnumerable<Person>>> Post(Person person)
+        {
+
+            _context.Add(person);
+
+            try
+            {
+                await _context.SaveChangesAsync();
+                return StatusCode(StatusCodes.Status201Created, person);
+            }
+
+            catch (DbUpdateException) {
+                if (PersonExists(person.Sno))
+                    return Conflict();
+                else
+                    return StatusCode(StatusCodes.Status500InternalServerError, new
+                    {
+                        message = "Server Error"
+                    });
+            }
+        }
+
+        private bool PersonExists(int id) {
+            return _context.people.Any(e => e.Sno == id);
         }
     }
 }
