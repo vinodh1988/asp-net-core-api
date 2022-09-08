@@ -21,6 +21,9 @@ namespace CrudAPI
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            using (var client = new SQLiteDBContext()) {
+                client.Database.EnsureCreated();
+            }
         }
 
         public IConfiguration Configuration { get; }

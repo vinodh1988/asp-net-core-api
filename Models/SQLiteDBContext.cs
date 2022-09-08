@@ -23,7 +23,8 @@ namespace CrudAPI.Models
 
                 entity.Property(e => e.Sno)
                 .HasColumnName("sno")
-                .HasColumnType("NUMBER(5)");
+                .HasColumnType("NUMBER(5)")
+                .ValueGeneratedNever();
 
                 entity.Property(e => e.Name)
                .HasColumnName("name")
