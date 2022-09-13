@@ -1,3 +1,4 @@
+using CrudAPI.Helpers;
 using CrudAPI.Models;
 using CrudAPI.Services;
 using Microsoft.AspNetCore.Builder;
@@ -35,6 +36,7 @@ namespace CrudAPI
             services.AddControllers();
             //services.AddScoped<IPersonService, PeopleService>();
             services.TryAddSingleton<IPersonService, PeopleService>();
+            services.AddScoped<IUserService, UserService>();
             services.AddEntityFrameworkSqlite().AddDbContext<SQLiteDBContext>();
             services.AddSwaggerGen(c =>
             {
@@ -55,6 +57,8 @@ namespace CrudAPI
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseMiddleware<JwtMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {

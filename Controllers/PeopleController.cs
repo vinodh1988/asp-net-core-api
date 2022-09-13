@@ -1,4 +1,5 @@
-﻿using CrudAPI.Models;
+﻿using CrudAPI.Helpers;
+using CrudAPI.Models;
 using CrudAPI.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -7,6 +8,7 @@ using System.Collections.Generic;
 
 namespace CrudAPI.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class PeopleController : ControllerBase
