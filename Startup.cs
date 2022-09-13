@@ -19,6 +19,7 @@ namespace CrudAPI
 {
     public class Startup
     {
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -33,6 +34,14 @@ namespace CrudAPI
         public void ConfigureServices(IServiceCollection services)
         {
 
+              services.AddCors(options =>
+        {
+            options.AddPolicy(name: MyAllowSpecificOrigins,
+                              policy =>
+                              {
+                                  policy.WithOrigins("*");
+                              });
+        });
             services.AddControllers();
             //services.AddScoped<IPersonService, PeopleService>();
             services.TryAddSingleton<IPersonService, PeopleService>();
@@ -59,6 +68,7 @@ namespace CrudAPI
             app.UseAuthorization();
 
             app.UseMiddleware<JwtMiddleware>();
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseEndpoints(endpoints =>
             {
