@@ -13,6 +13,7 @@ namespace CrudAPI.Models
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
             options.UseSqlite("Data Source='data.db'");
+            
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

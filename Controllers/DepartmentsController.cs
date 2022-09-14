@@ -24,7 +24,7 @@ namespace CrudAPI.Controllers
         public async Task<ActionResult<IEnumerable<Department>>> Get()
         {
 
-            return await _context.departments.ToListAsync();
+            return await _context.departments.Include(d=>d.Employees).ToListAsync();
         }
     }
 }
