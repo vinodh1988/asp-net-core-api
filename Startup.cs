@@ -40,6 +40,8 @@ namespace CrudAPI
                               policy =>
                               {
                                   policy.WithOrigins("*");
+                                  policy.AllowAnyHeader();
+                                  policy.AllowAnyMethod();
                               });
         });
             services.AddControllers();
