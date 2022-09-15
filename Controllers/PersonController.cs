@@ -126,11 +126,13 @@ namespace CrudAPI.Controllers
 
             var person = await _context.people
                 .FirstOrDefaultAsync(m => m.Sno == id);
+            
             if (person == null)
             {
                 return NotFound();
             }
-
+           _context.people.Remove(person);
+            _context.SaveChanges();
             return View(person);
         }
 

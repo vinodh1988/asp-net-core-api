@@ -28,6 +28,12 @@
     <form asp-action="Delete">
         <input type="hidden" asp-for="Sno" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+       
+        @Html.ActionLink("Back to List", // <-- Link text
+        "Index" // <-- Action Method Name
+
+        )
+
+
     </form>
 </div>
