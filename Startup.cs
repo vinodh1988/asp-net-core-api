@@ -45,6 +45,7 @@ namespace CrudAPI
                               });
         });
             services.AddControllers();
+            services.AddControllersWithViews();
             //services.AddScoped<IPersonService, PeopleService>();
             services.TryAddSingleton<IPersonService, PeopleService>();
             services.AddScoped<IUserService, UserService>();
@@ -64,7 +65,7 @@ namespace CrudAPI
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CrudAPI v1"));
             }
-
+            
             app.UseRouting();
 
             app.UseAuthorization();
@@ -74,6 +75,11 @@ namespace CrudAPI
 
             app.UseEndpoints(endpoints =>
             {
+                   endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Home}/{action=Index}/{id?}");
+
+            
                 endpoints.MapControllers();
             });
         }
