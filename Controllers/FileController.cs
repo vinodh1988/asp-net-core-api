@@ -59,5 +59,21 @@ namespace CrudAPI.Controllers
             return Ok(new { result = "File Uploaded and form data received is "+name });
         }
 
+
+        [HttpGet("download/{fileName}")]
+        public async Task<IActionResult> Download(string fileName)
+        {
+
+            var path = Path.Combine(Directory.GetCurrentDirectory(), "Resources");
+            var fullPath = Path.Combine(path, fileName );
+
+            var memory = new MemoryStream();
+            using (var stream = new FileStream(fullPath, FileMode.Open))
+            {
+                await stream.CopyToAsync(memory);
+            }
+            memory.Position = 0;
+            return File(memory, "application/octet-stream", Path.GetFileName(fullPath));
+        }
     }
 }
